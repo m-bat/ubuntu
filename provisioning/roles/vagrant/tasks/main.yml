@@ -1,0 +1,44 @@
+---
+- name: Add repository due to install emacs25
+  become: true
+  apt_repository:
+    repo: ppa:kelleyk/emacs
+    state: present
+
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install emacs25
+  become: true
+  apt: name=emacs25 state=present
+
+- name: delete .emacs.d
+  file:
+    path=~/.emacs.d
+    state=absent
+
+- name: Install packages
+  become: true
+  apt: name={{ item }} state=present
+  force: yes
+  with_items:
+    - zsh
+    - tmux
+
+- name: Checkout my dotfiles
+  git:
+    repo: https://github.com/m-bat/dotfiles.git
+    dest: ~/dotfiles
+    force: yes
+
+- name: Create symlinks
+  command: "~/dotfiles/setup.sh"
+
+- name: Set zsh as default shell for ubuntu user
+  become: true
+  command: "chsh -s /usr/bin/zsh vagrant"
+  
+ 
+    
+  

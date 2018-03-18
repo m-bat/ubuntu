@@ -1,0 +1,4 @@
+---
+# vars file for vagrant
+user_name: hadoop
+user_pass: hadoop
