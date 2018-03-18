@@ -11,8 +11,6 @@
       become: true
       raw: apt-get --yes install python
 
-  var_files:
-    - 
   roles:
     - vagrant
     
