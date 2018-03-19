@@ -27,6 +27,7 @@
     - tmux
     - qemu
     - exuberant-ctags
+    - global
 
 - name: Checkout my dotfiles
   git:
@@ -58,6 +59,11 @@
   command: "ctags -e -R"
   args:
     chdir: "~/sslab/xv6_research"
+
+- name: Create GTAGS file
+  command: "gtags"
+  args:
+    chdir: "~/sslab/xv6_research"    
   
 - name: Set Japan timezone
   become: true
