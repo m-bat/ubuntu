@@ -26,6 +26,7 @@
     - zsh
     - tmux
     - qemu
+    - exuberant-ctags
 
 - name: Checkout my dotfiles
   git:
@@ -39,7 +40,26 @@
 - name: Set zsh as default shell for ubuntu user
   become: true
   command: "chsh -s /usr/bin/zsh vagrant"
+
+
+# Setup research enviroment
+- name: Create sslab directory
+  file:
+    path: "~/sslab"
+    state: present
   
+- name: Checkout my research xv6_research
+  git:
+    repo: https://github.com/m-bat/xv6_research.git
+    dest: ~/sslab/xv6_research
+    force: yes
+  
+- name: Create TAGS file
+  command: "ctags -e -R"
+  args:
+    chdir: "~/sslab/xv6_research"
+  
+- name: Set Japan timezone
+  become: true
+  command: "cp /usr/share/zoneinfo/Japan /etc/localtime"
  
-    
-  
