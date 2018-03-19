@@ -25,6 +25,7 @@
   with_items:
     - zsh
     - tmux
+    - qemu
 
 - name: Checkout my dotfiles
   git:
