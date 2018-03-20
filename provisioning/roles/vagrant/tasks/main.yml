@@ -28,6 +28,7 @@
     - qemu
     - exuberant-ctags
     - global
+    - gdb
 
 - name: Checkout my dotfiles
   git:
