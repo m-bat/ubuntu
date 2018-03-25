@@ -48,7 +48,7 @@
 - name: Create sslab directory
   file:
     path: "~/sslab"
-    state: present
+    state: directory    
   
 - name: Checkout my research xv6_research
   git:
